@@ -2,7 +2,6 @@ version: '2'
 
 services:
   app2:
-    image: 'post-server2:latest'
     build:
       context: .
     container_name: app2

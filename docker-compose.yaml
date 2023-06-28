@@ -2,9 +2,8 @@ version: '2'
 
 services:
   demo1app:
-    image: 'post-server:latest'
     build:
-      context: .
+      context: ./demo1
     container_name: demo1
     depends_on:
       - demo1db
@@ -24,9 +23,8 @@ services:
       - POSTGRES_PASSWORD=compose-postgres
 
   demo2app:
-    image: 'post-server2:latest'
     build:
-      context: .
+      context: ./demo2
     container_name: demo2
     depends_on:
       - demo2db
