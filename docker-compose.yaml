@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+  demo1app:
+    image: 'post-server:latest'
+    build:
+      context: .
+    container_name: demo1
+    depends_on:
+      - demo1db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://demo1db:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "4000:8080"
+
+  demo1db:
+    image: 'postgres:13.1-alpine'
+    container_name: demo1db
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+
+  demo2app:
+    image: 'post-server2:latest'
+    build:
+      context: .
+    container_name: demo2
+    depends_on:
+      - demo2db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://demo2db:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "5000:8080"
+
+  demo2db:
+    image: 'postgres:13.1-alpine'
+    container_name: demo2db
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
