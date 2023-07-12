@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  app3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app3
+    ports:
+      - "7000:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://db3mongo:27017/test
+    depends_on:
+      - db3mongo
+
+  db3mongo:
+    image: mongo:latest
+    container_name: db3mongo
+    ports:
+      - "27017:27017"
