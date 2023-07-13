@@ -1,0 +1,35 @@
+name: Build And Test Spring Boot With MongoDB
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+      
+      - name: Build with Maven
+        run: mvn clean package
+      
+      - name: Set up MongoDB service # - name: Set up PostgreSQL service // uses: ???
+        uses: supercharge/mongodb-github-action@1.8.0
+      
+      - name: Run tests
+        run: mvn test
