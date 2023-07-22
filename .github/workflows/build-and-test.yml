@@ -29,8 +29,8 @@ jobs:
         with:
           maven-version: 3.8.2
       
-      - name: Set up MongoDB service # - name: Set up PostgreSQL service // uses: ???
-        uses: supercharge/mongodb-github-action@1.8.0
+      #- name: Set up MongoDB service # - name: Set up PostgreSQL service // uses: ???
+      #  uses: supercharge/mongodb-github-action@1.8.0
       
       - name: Run tests
         run: mvn clean package
